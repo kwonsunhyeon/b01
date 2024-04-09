@@ -11,6 +11,11 @@ java {
 	sourceCompatibility = '17'
 }
 
+compileJava {
+	options.compilerArgs += ["-parameters"]
+}
+
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
@@ -48,6 +53,9 @@ dependencies {
 
 	// Thymeleaf
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+
+	// @Valid(validation)
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 tasks.named('test') {
