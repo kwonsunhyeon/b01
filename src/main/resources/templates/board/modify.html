@@ -73,7 +73,7 @@
         for (let i = 0; i < errors.length; i++) {
             errorMsg += `${errors[i].field}은(는) ${errors[i].code} \n`
         }
-        history.replaceState({}, null, null) //브라우저  히스토리를 변경하지 않고 현재 URL을 다시 로드
+        history.replaceState({}, null, null) //브라우저  히스토리를 변경 하지 않고 현재 URL을 다시 로드
         alert(errorMsg)
     }
 

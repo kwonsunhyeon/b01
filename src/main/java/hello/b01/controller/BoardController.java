@@ -4,6 +4,8 @@ import hello.b01.dto.BoardDTO;
 import hello.b01.dto.PageRequestDTO;
 import hello.b01.dto.PageResponseDTO;
 import hello.b01.service.BoardService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -20,11 +22,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/board")
 @Log4j2
 @RequiredArgsConstructor
+@Tag(name="board", description = "게시물 관련 API")
 public class BoardController {
 
     private final BoardService boardService;
 
     @GetMapping("/list")
+    @Operation(summary = "전체 게시물 목록을 조회한다.")
     public void list(PageRequestDTO pageRequestDTO, Model model) {
 
         PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
@@ -39,6 +43,7 @@ public class BoardController {
     }
 
     @PostMapping("/register")   // localhost:8080/board/register
+    @Operation(summary = "새로운 게시물을 추가한다.")
     public String registerPost(@Valid BoardDTO boardDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         log.info("board POST register.........");
@@ -60,6 +65,7 @@ public class BoardController {
     }
 
     @GetMapping({"/read", "/modify"})
+    @Operation(summary = "하나의 게시물을 읽습니다.")
     public void read(@RequestParam("bno") Long bno, PageRequestDTO pageRequestDTO, Model model) {
 
         BoardDTO boardDTO = boardService.readOne(bno);
@@ -70,6 +76,7 @@ public class BoardController {
     }
 
     @PostMapping("/modify")
+    @Operation(summary = "게시물을 수정 합니다.")
     public String modify(PageRequestDTO pageRequestDTO,
                          @Valid BoardDTO boardDTO,
                          BindingResult bindingResult,
@@ -99,6 +106,7 @@ public class BoardController {
     }
 
     @PostMapping("/remove")
+    @Operation(summary = "게시물 하나를 삭제합니다.")
     public String remove(@RequestParam("bno") Long bno, RedirectAttributes redirectAttributes) {
 
         log.info("remove post..." + bno);
