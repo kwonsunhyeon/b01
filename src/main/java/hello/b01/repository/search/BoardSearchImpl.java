@@ -81,6 +81,7 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
     public Page<BoardListReplyCountDTO> searchWithReplyCount(String[] types, String keyword, Pageable pageable) {
         QBoard board = QBoard.board;
         QReply reply = QReply.reply;
+
         JPQLQuery<Board> query = from(board);
         query.leftJoin(reply).on(reply.board.eq(board));
 
