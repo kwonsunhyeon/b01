@@ -14,7 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
 
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -140,13 +139,13 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
             for (String type : types) {
 
                 switch (type) {
-                    case "t" :
+                    case "t":
                         booleanBuilder.or(board.title.contains(keyword));
                         break;
-                    case "c" :
+                    case "c":
                         booleanBuilder.or(board.content.contains(keyword));
                         break;
-                    case "w" :
+                    case "w":
                         booleanBuilder.or(board.writer.contains(keyword));
                         break;
                 }
@@ -164,7 +163,7 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
         List<BoardListAllDTO> dtoList = tupleList.stream().map(tuple -> {
 
             Board board1 = (Board) tuple.get(board);
-            long replyCount = tuple.get(1,Long.class);
+            long replyCount = tuple.get(1, Long.class);
 
             BoardListAllDTO dto = BoardListAllDTO.builder()
                     .bno(board1.getBno())

@@ -94,6 +94,7 @@ public class BoardServiceImpl implements BoardService {
                 .total((int) result.getTotalElements())
                 .build();
     }
+
     @Override
     public PageResponseDTO<BoardListReplyCountDTO> listWithReplyCount(PageRequestDTO pageRequestDTO) {
 
@@ -106,7 +107,7 @@ public class BoardServiceImpl implements BoardService {
         return PageResponseDTO.<BoardListReplyCountDTO>withAll()
                 .pageRequestDTO(pageRequestDTO)
                 .dtoList(result.getContent())
-                .total((int)result.getTotalElements())
+                .total((int) result.getTotalElements())
                 .build();
     }
 
@@ -122,7 +123,7 @@ public class BoardServiceImpl implements BoardService {
         return PageResponseDTO.<BoardListAllDTO>withAll()
                 .pageRequestDTO(pageRequestDTO)
                 .dtoList(result.getContent())
-                .total((int)result.getTotalElements())
+                .total((int) result.getTotalElements())
                 .build();
     }
 

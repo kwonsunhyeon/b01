@@ -17,6 +17,7 @@ public class BoardServiceTests {
 
     @Autowired
     private BoardService boardService;
+
     @Test
     public void testRegister() {
 
@@ -43,7 +44,7 @@ public class BoardServiceTests {
                 .content("Updated content 101...")
                 .build();
         //첨부파일을 하나 추가
-        boardDTO.setFileNames(Arrays.asList(UUID.randomUUID()+"_zzz.jpg"));
+        boardDTO.setFileNames(Arrays.asList(UUID.randomUUID() + "_zzz.jpg"));
 
         boardService.modify(boardDTO);
     }
@@ -76,15 +77,16 @@ public class BoardServiceTests {
 
         boardDTO.setFileNames(
                 Arrays.asList(
-                        UUID.randomUUID()+"_aaa.jpg",
-                        UUID.randomUUID()+"_bbb.jpg",
-                        UUID.randomUUID()+"_bbb.jpg"
+                        UUID.randomUUID() + "_aaa.jpg",
+                        UUID.randomUUID() + "_bbb.jpg",
+                        UUID.randomUUID() + "_bbb.jpg"
                 ));
 
         Long bno = boardService.register(boardDTO);
 
         log.info("bno: " + bno);
     }
+
     @Test
     public void testReadAll() {
 
@@ -98,6 +100,7 @@ public class BoardServiceTests {
             log.info(fileName);
         }// end for
     }
+
     @Test
     public void testRemoveAll() {
 
@@ -119,7 +122,7 @@ public class BoardServiceTests {
         List<BoardListAllDTO> dtoList = responseDTO.getDtoList();
 
         dtoList.forEach(boardListAllDTO -> {
-            log.info(boardListAllDTO.getBno()+":"+boardListAllDTO.getTitle());
+            log.info(boardListAllDTO.getBno() + ":" + boardListAllDTO.getTitle());
 
             if (boardListAllDTO.getBoardImages() != null) {
                 for (BoardImageDTO boardImage : boardListAllDTO.getBoardImages()) {

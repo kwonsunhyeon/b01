@@ -32,10 +32,11 @@ public class Board extends BaseEntity {
         this.title = title;
         this.content = content;
     }
+
     @OneToMany(mappedBy = "board",
-                        cascade = {CascadeType.ALL},
-                        fetch = FetchType.LAZY,
-                        orphanRemoval = true)
+            cascade = {CascadeType.ALL},
+            fetch = FetchType.LAZY,
+            orphanRemoval = true)
     @Builder.Default
     @BatchSize(size = 20)
     private Set<BoardImage> imageSet = new HashSet<>();
@@ -49,6 +50,7 @@ public class Board extends BaseEntity {
                 .build();
         imageSet.add(boardImage);
     }
+
     public void clearImages() {
         imageSet.forEach(boardImage -> boardImage.changeBoard(null));
         this.imageSet.clear();
