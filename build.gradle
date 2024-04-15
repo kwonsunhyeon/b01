@@ -37,6 +37,7 @@ dependencies {
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'net.coobird:thumbnailator:0.4.16'
 
 	// Lombok(Log4j)
 	testCompileOnly 'org.projectlombok:lombok'
