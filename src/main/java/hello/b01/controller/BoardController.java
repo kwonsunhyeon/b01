@@ -1,9 +1,6 @@
 package hello.b01.controller;
 
-import hello.b01.dto.BoardDTO;
-import hello.b01.dto.BoardListReplyCountDTO;
-import hello.b01.dto.PageRequestDTO;
-import hello.b01.dto.PageResponseDTO;
+import hello.b01.dto.*;
 import hello.b01.service.BoardService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -34,33 +31,35 @@ public class BoardController {
 
         //PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
 
-        PageResponseDTO<BoardListReplyCountDTO> responseDTO = boardService.listWithReplyCount(pageRequestDTO);
+        PageResponseDTO<BoardListAllDTO> responseDTO = boardService.listwithAll(pageRequestDTO);
 
         log.info(responseDTO);
 
         model.addAttribute("responseDTO", responseDTO);
     }
 
+
     @GetMapping("/register")
-    public void registerGET() {
+    public void registerGET(){
+
     }
 
-    @PostMapping("/register")   // localhost:8080/board/register
+
+    @PostMapping("/register")
     @Operation(summary = "새로운 게시물을 추가한다.")
-    public String registerPost(@Valid BoardDTO boardDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String registerPost(@Valid BoardDTO boardDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes){
 
-        log.info("board POST register.........");
+        log.info("board POST register.......");
 
-        if (bindingResult.hasErrors()) {
-            log.info("has errors.........");
-            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-
+        if(bindingResult.hasErrors()) {
+            log.info("has errors.......");
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors() );
             return "redirect:/board/register";
         }
 
         log.info(boardDTO);
 
-        Long bno = boardService.register(boardDTO);
+        Long bno  = boardService.register(boardDTO);
 
         redirectAttributes.addFlashAttribute("result", bno);
 
